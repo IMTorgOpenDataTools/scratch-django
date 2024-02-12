@@ -1,22 +1,44 @@
-#!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
 import os
 import sys
 
+from django.conf import settings
 
-def main():
-    """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "foo.settings")
-    try:
-        from django.core.management import execute_from_command_line
-    except ImportError as exc:
-        raise ImportError(
-            "Couldn't import Django. Are you sure it's installed and "
-            "available on your PYTHONPATH environment variable? Did you "
-            "forget to activate a virtual environment?"
-        ) from exc
-    execute_from_command_line(sys.argv)
+DEBUG = os.environ.get('DEBUG', 'on') == 'on'
+
+SECRET_KEY = os.environ.get('SECRET_KEY', '{{ secret_key }}')
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
+
+settings.configure(
+    DEBUG=DEBUG,
+    SECRET_KEY=SECRET_KEY,
+    ALLOWED_HOSTS=ALLOWED_HOSTS,
+    ROOT_URLCONF=__name__,
+    MIDDLEWARE_CLASSES=(
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    ),
+)
+
+from django.urls import re_path
+from django.core.wsgi import get_wsgi_application
+from django.http import HttpResponse
+
+
+def index(request):
+    return HttpResponse('Hello World')
+
+
+urlpatterns = (
+    re_path(r'^$', index),
+)
+
+
+application = get_wsgi_application()
 
 
 if __name__ == "__main__":
-    main()
+    from django.core.management import execute_from_command_line
+
+    execute_from_command_line(sys.argv)

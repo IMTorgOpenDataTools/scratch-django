@@ -3,44 +3,17 @@
 # List of Django Projects
 
 * Basic template - created with `$ django-admin startproject foo`
-* Minimal server - manually created template
+* Minimal server - manually created single-page template
 * Basic structure with landing page and login views - 
 * Minimal REST API - uses `django-rest-framework`
 * Basic REST API with security - ``
 * Basic REST API with celery - ``
 
 
+## Quickstart
 
-
-
-
-## Basic Django Template
-
-Start with basic django project template:
+Start the environment and move to the branch of the desired template:
 
 ```
-$ django-admin startproject foo
+pipenv install
 ```
-
-Remove either asgi.py or wsgi.py:
-
-```
-$ tree foo
-foo
-├── foo
-│   ├── __init__.py
-│   ├── asgi.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-└── manage.py
-```
-
-Prepare the database and run the server with:
-
-```
-python manage.py migrate
-python foo/manage.py runserver
-```
-
-Notice the new `db.sqlite3` file, and visit: `http://localhost:8000/`.
