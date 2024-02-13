@@ -7,4 +7,4 @@ def newsView(request):
 
 def homeview(request):
     #return HttpResponse('homepage')
-    return render(request, "index_original.html")    #from /templates/index.html, adjust /foo/settings.py, TEMPLATES, accordingly
+    return render(request, "index.html")    #from /templates/index.html, adjust /foo/settings.py, TEMPLATES, accordingly
