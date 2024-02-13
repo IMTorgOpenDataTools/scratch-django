@@ -3,7 +3,8 @@ from django.http import HttpResponse
 
 
 def newsView(request):
-    return render(request, "news.html")
+    return render(request, "news.html")     #from /bar/templates/news.html
 
 def homeview(request):
-    return HttpResponse('homepage')
+    #return HttpResponse('homepage')
+    return render(request, "index_original.html")    #from /templates/index.html, adjust /foo/settings.py, TEMPLATES, accordingly
