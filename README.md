@@ -6,6 +6,7 @@
 * Minimal server - manually created template
 * Basic structure with landing page (jinja) - app `foo/bar/templates` and project `foo/templates`
 * Minimal REST API - uses `django-rest-framework`
+* Advanced ORM REST API - uses the django orm
 * Basic REST API with security - ``
 * Basic REST API with celery - ``
 
