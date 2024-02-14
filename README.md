@@ -13,6 +13,13 @@
 
 ## Structure
 
+Install
+
+```shell
+pipenv install django-cors-headers
+```
+
+
 Start with basic django project template:
 
 ```shell
@@ -28,26 +35,60 @@ $ python manage.py createsuperuser --username admin --email admin@example.com
 In `foo/settings.py` add:
 
 ```python
+#ALLOWED_HOSTS = ['localhost']
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173'
+]
 
 INSTALLED_APPS = [
     ...
     'django-extensions',
     'rest_framework',
-    'api.apps.ApiConfig'
+    'api.apps.ApiConfig',
+    'corsheaders'
     ]
 ...
-
+MIDDLEWARE = [
+    ...
+    'corsheaders.middleware.common.CorsMiddleware'
+]
+...
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
 ```
 
-
+The directory structure:
 
 ```
 $ tree foo
-
+foo
+├── api
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_rename_user_examiner.py
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── db.sqlite3
+├── foo
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── load_data.py
+└── manage.py
 ```
 
 
@@ -74,14 +115,29 @@ __App__
 
 To interact with the models, directly, the `shell_plus` command from `django-extensions` which automatically loads the models defined in the project and displays the generated SQL.
 
-```
+```shell
 python manage.py makemigrations
 python manage.py migrate
 
 python manage.py shell_plus --print-sql
+
 >>> e = User(name='John Doe')
 >>> e.save()
 ```
+
+Load the test data into the `db.sqlite` file with:
+
+```shell
+python load_data.py
+
+sqlite3 db.sqlite 
+sqlite> .headers on
+sqlite> .mode columns
+sqlite> select * from api_examiner;
+sqlite> .exit
+```
+
+Or, in a single line: `sqlite3 db.sqlite3  -header -column 'select * from api_examiner;'`
 
 
 ## Run
@@ -92,4 +148,11 @@ Prepare the database and run the server with:
 python foo/manage.py runserver
 ```
 
-Notice the new `db.sqlite3` file, and visit: `http://localhost:8000/`.
+Now visit: `http://localhost:8000/`.
+
+
+
+## TODO
+
+* [joins](https://www.pythontutorial.net/django-tutorial/django-one-to-one/)
+* [py create uint8array from file](https://stackoverflow.com/questions/71036800/how-to-write-file-with-data-is-uint8array)

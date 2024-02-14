@@ -7,5 +7,5 @@ router = DefaultRouter()
 router.register(r'users', ExaminerViewSet)
 
 urlpatterns = [
-    path('users/', include(router.urls))
+    path('', include(router.urls))
 ]

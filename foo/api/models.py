@@ -15,7 +15,7 @@ class Examiner(models.Model):
     def __str__(self):
         return self.name
 
-'''
+'''TODO: 
 class Note(models.Model):
     uuid = models.UUIDField()
     user_id = models.TextField()
