@@ -23,6 +23,9 @@ pipenv install django-cors-headers
 Start with basic django project template:
 
 ```shell
+$ pipenv install
+$ pipenv shell
+
 $ django-admin startproject foo
 $ cd foo
 $ python manage.py startapp api
@@ -142,10 +145,18 @@ Or, in a single line: `sqlite3 db.sqlite3  -header -column 'select * from api_ex
 
 ## Run
 
-Prepare the database and run the server with:
+Run the backend server with:
 
+```shell
+$ cd foo
+$ python manage.py runserver
 ```
-python foo/manage.py runserver
+
+Run the frontend server with:
+
+```shell
+$ cd client
+$ npm run dev
 ```
 
 Now visit: `http://localhost:8000/`.
@@ -156,3 +167,10 @@ Now visit: `http://localhost:8000/`.
 
 * [joins](https://www.pythontutorial.net/django-tutorial/django-one-to-one/)
 * [py create uint8array from file](https://stackoverflow.com/questions/71036800/how-to-write-file-with-data-is-uint8array)
+
+
+## References
+
+* [Django REST Framework](https://www.youtube.com/watch?v=cJveiktaOSQ)
+* [Basic structure with landing page (jinja)](https://www.youtube.com/watch?v=-qUoCBExAvY)
+* [Minimal REST API](https://www.youtube.com/watch?v=DvNBQm_M6q8)
