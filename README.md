@@ -168,6 +168,7 @@ Now visit: `http://localhost:8000/`.
 
 * [joins](https://www.pythontutorial.net/django-tutorial/django-one-to-one/)
 * [py create uint8array from file](https://stackoverflow.com/questions/71036800/how-to-write-file-with-data-is-uint8array)
+* [ml celery](https://github.com/jonathanreadshaw/ServingMLFastCelery)[ref2](https://towardsdatascience.com/deploying-ml-models-in-production-with-fastapi-and-celery-7063e539a5db)
 
 
 ## References
